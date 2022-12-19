@@ -1,0 +1,25 @@
+
+<ng-container *ngIf="showGrid">
+<li *ngFor="let item of invoice"
+  class="invoice-item theme-animation"
+  (click)="showInfo(item)"
+>
+  <span class="inovice-id">{{item.id}}</span>
+  <span class="invoice-date">
+    Due {{item.invoiceDate | date:'mediumDate'}}
+  </span>
+  <p class="inovice-client">{{item.clientName}}</p>
+  <p class="invoice-total">${{item.items.qty*item.items.price}}</p>
+  <span class="" [ngClass]="{'status-paid':item.paymentTerms=='Paid' , 'status-pending':item.paymentTerms=='Pending'}">
+    {{item.paymentTerms}}
+  </span>
+  <img
+    src="./assets/img/icon-arrow-down.svg"
+    alt="Icon Arrow"
+    class="invoice-icon-arrow"
+  />
+</li>
+</ng-container>
+
+<app-invoice *ngIf="!showGrid" [infoElement]="infoElement" (childChange)="parentEventHandlerFunction($event)"
+></app-invoice>

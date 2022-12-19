@@ -1,0 +1,121 @@
+<div class="invoice">
+    <div class="invoice-back">
+      <button class="go-back" (click)="goBack()">
+        <img src="./assets/img/icon-arrow-left.svg" alt="go back" />
+        <span>Go back</span>
+      </button>
+    </div>
+  
+    <div class="invoice-status-card flex-between theme-animation">
+      <div class="flex-between">
+        <p>Status</p>
+        <span
+          class="inovice-status" [ngClass]="{'status-paid':infoElement.paymentTerms=='Paid' , 'status-pending':infoElement.paymentTerms=='Pending'}">
+          {{infoElement.paymentTerms}}
+        </span>
+      </div>
+      <div class="invoice-actions top">
+        <button class="btn">Edit</button>
+        <button class="btn btn-delete" (click)="deleteItem()">Delete</button>
+        <button *ngIf="infoElement.paymentTerms==='Pending'"
+          class="btn btn-paid" (click)="markAsPaid()">
+          Mark As Paid
+        </button>
+      </div>
+    </div>
+  
+    <div class="invoice-wrap theme-animation">
+      <div class="invoice-header flex-between">
+        <div class="invoice-header--left">
+          <span>{{infoElement.id}}</span>
+          <p>Graphic Design </p>
+        </div>
+  
+        <address class="invoice-header--right">
+          <p>{{infoElement.invoiceDetails.street}}</p>
+          <p>{{infoElement.invoiceDetails.city}}</p>
+          <p>{{infoElement.invoiceDetails.postcode}}</p>
+          <p>{{infoElement.invoiceDetails.country}}</p>
+        </address>
+      </div>
+  
+      <div class="invoice-body flex-between">
+        <div class="date-wrap">
+          <div class="date">
+            <span>Invoice Date</span>
+            <p>{{infoElement.invoiceDate}}</p>
+          </div>
+          <div class="date">
+            <span>Payment Due</span>
+            <p>{{infoElement.dueDate}}</p>
+          </div>
+        </div>
+  
+        <div class="bill-to">
+          <span>Bill To</span>
+          <h2>{{infoElement.clientName}}</h2>
+          <p>{{infoElement.clientAddress.street}}</p>
+          <p>{{infoElement.clientAddress.city}}</p>
+          <p>{{infoElement.clientAddress.postcode}}</p>
+          <p>{{infoElement.clientAddress.country}}</p>
+        </div>
+  
+        <div class="send-to">
+          <span>Send to</span>
+          <p>{{infoElement.clientEmail}}</p>
+        </div>
+      </div>
+  
+      <div class="invoice-table theme-animation">
+        <table>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th class="text-center">QTY.</th>
+              <th class="text-right">Price</th>
+              <th class="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{infoElement.items.itemName}}</td>
+              <td class="text-center">{{infoElement.items.qty}}</td>
+              <td class="text-right">${{infoElement.items.price}}</td>
+              <td class="text-right">${{infoElement.items.qty*infoElement.items.price}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="invoice-total flex-between">
+        <span>Amount Due</span>
+        <span class="invoice-total-amout" *ngIf="infoElement.paymentTerms==='Pending'">${{infoElement.items.qty*infoElement.items.price}}</span>
+        <span class="invoice-total-amout" *ngIf="infoElement.paymentTerms==='Paid'">$00.00</span>
+      </div>
+    </div>
+  
+    <div class="invoice-actions bottom">
+      <button class="btn" >Edit</button>
+      <button class="btn btn-delete" >Delete</button>
+      <button
+      class="btn btn-paid">
+      Mark As Paid
+    </button>
+    </div>
+  </div>
+  
+
+  <!-- <app-modal>
+    <div class="modal-invoice-delete">
+      <h2>Confirm Deletion</h2>
+      <p>
+        Are you sure you want to delete invoice {{ invoice?._id | slice: 0:6 | uppercase }}? This action
+        cannot be undone.
+      </p>
+      <div class="invoice-actions">
+        <button class="btn" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-delete" (click)="handleDelete()">Delete</button>
+      </div>
+    </div>
+  </app-modal> -->
+  

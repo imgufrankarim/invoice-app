@@ -1,0 +1,277 @@
+<div class="header fadeIn">
+    <div class="header-title">
+      <h2>Invoices</h2>
+      <span>There are {{saveddata}} total invoices.</span>
+    </div>
+    <div>
+      <div class="header-filter--dropdown">
+        <button class="header-btn--filter">
+          <span class="header-btn-text">
+            Filter <span class="header-text-hide">by status</span>
+          </span>
+          <img
+            src="./assets/img/icon-arrow-down.svg"
+            alt="Icon Arrow"
+            class="filter-icon-arrow"
+            
+          />
+        </button>
+        <!-- <ul class="dropdown">
+          <li >
+            <span class="filter-checkbox" ></span>
+            <span class="filter-text">Hello</span>
+          </li>
+        </ul> -->
+      </div>
+      <button class="header-btn--new" (click)="drawer.toggle()">
+        <div class="wrap-icon-plus">
+          <img src="./assets/img/icon-plus.svg" alt="Icon Plus" />
+        </div>
+        <span class="header-btn-text">
+          New <span class="header-text-hide">Invoice</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <app-invoice-list></app-invoice-list>
+
+ 
+  <mat-drawer-container>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+  <div class="invoice-form theme-animation">
+
+  <div class="form-wrap">
+    <h2>Create Invoice</h2>
+    <form novalidate autocomplete="off" [formGroup]="invoiceForm">
+      <fieldset>
+        <legend>Bill From</legend>
+        <div class="form-section bill-from" formGroupName="invoiceDetails">
+          <div class="form-control">
+            <input
+              type="text"
+              id="street"
+              formControlName="street"
+              autocomplete="off"
+            />
+            <label for="street" data-test="prueba"> Street Address </label>
+          </div>
+          <div class="form-control">
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              autocomplete="off"
+            />
+            <label for="city">City</label>
+          </div>
+          <div class="form-control">
+            <input
+              type="text"
+              id="code"
+              formControlName="postcode"
+              autocomplete="off"
+            />
+            <label for="code">Post Code</label>
+          </div>
+          <div class="form-control">
+            <input
+              type="text"
+              id="country"
+              formControlName="country"
+              autocomplete="off"
+            />
+            <label for="country">Country</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Bill To</legend>
+        <div class="form-section bill-to">
+          <div class="form-control">
+            <input
+              type="text"
+              id="name"
+              formControlName="clientName"
+              autocomplete="off"
+            />
+            <label for="name">Client's Name</label>
+          </div>
+          <div class="form-control">
+            <input
+              type="text"
+              id="email"
+              placeholder="e.g. email@example.com"
+              formControlName="clientEmail"
+              autocomplete="off"
+            />
+            <label for="email">Client's Email</label>
+          </div>
+          <ng-container formGroupName="clientAddress">
+            <div class="form-control">
+              <input
+                type="email"
+                id="street-to"
+                formControlName="street"
+                autocomplete="off"
+              />
+              <label for="street-to">Street Address</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="text"
+                id="city-to"
+                formControlName="city"
+                autocomplete="off"
+              />
+              <label for="city-to">City</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="text"
+                id="code-to"
+                formControlName="postcode"
+                autocomplete="off"
+              />
+              <label for="code-to">Post Code</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="text"
+                id="country-to"
+                formControlName="country"
+                autocomplete="off"
+              />
+              <label for="country-to">Country</label>
+            </div>
+          </ng-container>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div class="form-section bill-date">
+          <div class="form-control date">
+            <input
+              type="date"
+              id="invoice-date"
+              formControlName="invoiceDate"
+              autocomplete="off"
+            />
+            <label for="invoice-date">Invoice Date</label>
+          </div>
+          <div class="form-control select">
+            <select
+              id="payment-terms"
+              formControlName="paymentTerms"
+              autocomplete="off"
+            >
+              <option>
+                Pending
+              </option>
+              <option>
+                Paid
+              </option>
+            </select>
+            <img
+              src="./assets/img/icon-arrow-down.svg"
+              alt="Icon Arrow"
+            />
+            <label for="payment-terms"> Payment Terms </label>
+          </div>
+          <div class="form-control">
+            <input
+              type="text"
+              id="description"
+              placeholder="e.g. Graphic Design Service"
+              formControlName="description"
+              autocomplete="off"
+            />
+            <label for="description">Description</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="add-items">
+        <h3>Item List</h3>
+
+        <div formGroupName="items">
+          <div
+            class="form-section">
+            <div class="form-control">
+              <input
+                type="text"
+                id="item-name"
+                formControlName="itemName"
+                autocomplete="off"/>
+              <label for="item-name">Item Name</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="number"
+                id="qty"
+                formControlName="qty"
+                autocomplete="off"
+              />
+              <label for="qty">Qty.</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="number"
+                id="price"
+                formControlName="price"
+                autocomplete="off"
+              />
+              <label for="price">Price</label>
+            </div>
+            <div class="form-control">
+              <input
+                type="number"
+                id="total"
+                readonly
+                formControlName="total"
+                autocomplete="off"
+              />
+              <label for="total">Total</label>
+            </div>
+            <div class="form-control flex-center">
+              <button>
+                <svg width="13" height="16" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.583 3.556v10.666c0 .982-.795 1.778-1.777 1.778H2.694a1.777 1.777 0 01-1.777-1.778V3.556h10.666zM8.473 0l.888.889h3.111v1.778H.028V.889h3.11L4.029 0h4.444z"
+                    fill-rule="nonzero"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <button class="btn btn-add-items">
+        + Add New Item
+      </button>
+
+      <div class="error-message" *ngIf="showErrorMessage">
+        <p>- All fields must be filled.</p>
+        <p>- An item must be added.</p>
+      </div>
+    </form>
+
+    <div class="invoice-form-actions flex-between">
+      <button class="btn"  (click)= "drawer.close()">Discard</button>
+      <div>
+        <button class="btn btn-draft">
+          Save as Draft
+        </button>
+        <button class="btn btn-send" type="submit" (click)="onSubmit()">
+          Save & Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </mat-drawer>
+</mat-drawer-container>
+  
