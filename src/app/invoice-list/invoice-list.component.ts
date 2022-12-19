@@ -9,7 +9,6 @@ import { ArticleService } from '../article.service';
 export class InvoiceListComponent implements OnInit {
 
   constructor( private _article : ArticleService,  ) {}
-  // @Input() invoice : any;
   showGrid : boolean = true;
   infoElement : any = {};
   invoice: any = [];
@@ -17,6 +16,7 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
       this.invoice = this._article.invoice;
   }
+
 
 
   showInfo(item:any) {
